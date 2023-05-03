@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="eshop" transaction-type="RESOURCE_LOCAL"> <!-- transaction-type = communication avec bdd, 2 valeurs possibles : JTA ou RESOURCE_LOCAL -->
+		<!-- provider = implémentation de jpa utilisée -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<properties>
+			<!-- Le suite de la config fonctionne uniquement avec hibernate car selon l'implémentation -->
+			<!-- configuration des drivers du jdbc -->
+			<property name="hibernate.connection.driver" value="com.mysql.cj.jdbc.Driver"/>
+			<!-- url, la base indiquée doit exister, sinon ça crash -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/armee"/>
+			<property name="hibernate.connection.user" value="root"/>
+			<property name="hibernate.connection.password" value=""/>
+			
+			<!-- jpa controle la structure de la bdd -->
+			<!-- validate(contrôle)=> passe/crash -->
+			<!-- create=> drop, create table des entités -->
+			<!-- update=> contrôle, s'il manque des choses dans la bdd, ils sont ajoutés -->
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+			
+			<!-- affichage des requêtes, ne sert pas beaucoup -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+
+</persistence>
