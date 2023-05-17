@@ -1,13 +1,17 @@
 package armee.entities;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,41 +21,63 @@ public class Composition {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="composition_id")
-	private Integer id;
-	@ManyToOne
-	@Column(name="composition_unite")
-	private Unite unite;
-	@ManyToOne
-	@Column(name="composition_partie")
-	private Partie partie;
+	private Long id;
+	@OneToMany(mappedBy = "composition")
+	private Set<Unite> unites;
+	@OneToMany(mappedBy = "compoJoueur")
+	private Set<Partie> parties;
 	@Column(name="composition_budget")
 	private int budget = 100;
 	
 	public Composition() {
 	}
 
-	public Composition(Unite unite, Partie partie) {
-		this.unite = unite;
-		this.partie = partie;
-		}
+	
+
+	public Composition(Set<Unite> unites, Set<Partie> parties, int budget) {
+		this.unites = unites;
+		this.parties = parties;
+		this.budget = budget;
+	}
 
 	
-	
-	public Unite getUnite() {
-		return unite;
+
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setUnite(Unite unite) {
-		this.unite = unite;
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Partie getPartie() {
-		return partie;
+
+
+	public Set<Unite> getUnites() {
+		return unites;
 	}
 
-	public void setPartie(Partie partie) {
-		this.partie = partie;
+
+
+	public void setUnites(Set<Unite> unites) {
+		this.unites = unites;
 	}
+
+
+
+	public Set<Partie> getParties() {
+		return parties;
+	}
+
+
+
+	public void setParties(Set<Partie> parties) {
+		this.parties = parties;
+	}
+
+
 
 	public int getBudget() {
 		return budget;

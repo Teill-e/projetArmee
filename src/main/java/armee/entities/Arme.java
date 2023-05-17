@@ -19,12 +19,12 @@ public class Arme {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="arme_id")
-	private Integer id;
+	private Long id;
 	@Column(name="arme_typeA")
 	@Enumerated(EnumType.STRING)
 	private TypeA typeA;
 	@ManyToMany(mappedBy = "armes")
-	private Set<Unite> uniteArmees;
+	private Set<Unite> uniteArmes;
 		
 	public Arme() {
 	}
@@ -34,12 +34,21 @@ public class Arme {
 		
 	}
 
-	public Set<Unite> getUniteArmees() {
-		return uniteArmees;
+	
+	public Long getId() {
+		return id;
 	}
 
-	public void setUniteArmees(Set<Unite> uniteArmees) {
-		this.uniteArmees = uniteArmees;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Unite> getUniteArmes() {
+		return uniteArmes;
+	}
+
+	public void setUniteArmes(Set<Unite> uniteArmes) {
+		this.uniteArmes = uniteArmes;
 	}
 
 	public TypeA getTypeA() {

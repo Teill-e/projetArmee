@@ -6,6 +6,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ public class Joueur extends Compte{
 	private String login;
 	@Column(name="joueur_password",nullable=false, length=50)
 	private String password;
-	@OneToMany
+	@ManyToMany
 	@JoinColumn(name = "partie_id")
 	private Set<Partie> listeParties;
 	

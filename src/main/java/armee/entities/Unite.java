@@ -22,7 +22,7 @@ public class Unite {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="unite_id")
-	private Integer id;
+	private Long id;
 	@ManyToMany
 	@JoinTable(
 			name="unite_arme",
@@ -34,6 +34,9 @@ public class Unite {
 	@ManyToOne
 	@JoinColumn(name = "armee_id")
 	private Armee armee;
+	@ManyToOne
+	@JoinColumn(name = "unite_composition")
+	private Composition composition;
 	
 	public Unite() {
 	}
@@ -56,7 +59,32 @@ public class Unite {
 	}
 
 
-	public void setId(Integer id) {
+	public Set<Arme> getArmes() {
+		return armes;
+	}
+
+
+	public void setArmes(Set<Arme> armes) {
+		this.armes = armes;
+	}
+
+
+	public Composition getComposition() {
+		return composition;
+	}
+
+
+	public void setComposition(Composition composition) {
+		this.composition = composition;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 

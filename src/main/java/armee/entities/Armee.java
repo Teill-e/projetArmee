@@ -27,7 +27,7 @@ public abstract class Armee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="armee_id")
-	protected Integer id;
+	protected Long id;
 	@Column(name="armee_pv")
 	protected Integer pv;
 	@Column(name="armee_moral")
@@ -48,6 +48,22 @@ public abstract class Armee {
 		this.pays = pays;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Unite> getListeUnites() {
+		return listeUnites;
+	}
+
+	public void setListeUnites(Set<Unite> listeUnites) {
+		this.listeUnites = listeUnites;
+	}
+
 	public Integer getPv() {
 		return pv;
 	}

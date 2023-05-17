@@ -16,34 +16,34 @@ import armee.entities.Unite;
 
 public class AppTest {
 
-	public static void main(String[] args) {
-		Joueur joueur = new Joueur("joueur", "12345");
-		System.out.println(joueur.getLogin() + " " + joueur.getPassword());
-		
-		
-		
-		Composition compoIA = new Composition();
-
-
-	Partie partie = new Partie(LocalDate.now(), false, joueur, null, compoIA);
-	System.out.println(partie.getDate().toString());
-	
-	Armee armee = new ArmeeTerre(100, Pays.Australie);
-	System.out.println(armee.getPays());
-	
-	Arme arme = new Arme(TypeA.couteau);
-	System.out.println(arme.getTypeA());
-	Set<Arme> armes = new HashSet();
-	armes.add(arme);
-	
-	Unite unite = new Unite(armes, 10, armee);
-	System.out.println(unite.getPrix());
-	
-	Composition compoJoueur = new Composition(unite, partie);
-	System.out.println(compoJoueur.getBudget()); 
-	
-	
+//	public static void main(String[] args) {
+//		Joueur joueur = new Joueur("joueur", "12345");
+//		System.out.println(joueur.getLogin() + " " + joueur.getPassword());
+//		
+//		
+//		
+//		Composition compoIA = new Composition();
+//
+//
+//	Partie partie = new Partie(LocalDate.now(), false, joueur, null, compoIA);
+//	System.out.println(partie.getDate().toString());
+//	
+//	Armee armee = new ArmeeTerre(100, Pays.Australie);
+//	System.out.println(armee.getPays());
+//	
+//	Arme arme = new Arme(TypeA.couteau);
+//	System.out.println(arme.getTypeA());
+//	Set<Arme> armes = new HashSet();
+//	armes.add(arme);
+//	
+//	Unite unite = new Unite(armes, 10, armee);
+//	System.out.println(unite.getPrix());
+//	
+//	Composition compoJoueur = new Composition(unite, partie);
+//	System.out.println(compoJoueur.getBudget()); 
+//	
+//	
 	 
 	
-	}
+//	}
 }
