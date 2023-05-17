@@ -12,5 +12,5 @@ import armee.entities.Partie;
 
 public interface CompositionRepository extends JpaRepository<Composition, Long> {
 
-	Optional<Composition> findCompositionByParties(Partie partie);
+	Optional<Composition> findByParties(Partie partie);
 }

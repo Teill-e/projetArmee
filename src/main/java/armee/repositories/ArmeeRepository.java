@@ -10,4 +10,5 @@ import armee.entities.Armee;
 public interface ArmeeRepository extends JpaRepository<Armee, Long> {
 
 	
+	
 }
