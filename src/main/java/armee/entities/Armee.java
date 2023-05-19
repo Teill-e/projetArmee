@@ -35,8 +35,7 @@ public abstract class Armee {
 	@Column(name="armee_pays")
 	@Enumerated(EnumType.STRING)
 	protected Pays pays;
-	@OneToMany
-	@JoinColumn(name = "unite_id")
+	@OneToMany(mappedBy="armee")
 	protected Set<Unite> listeUnites;
 		
 	public Armee() {
@@ -48,6 +47,14 @@ public abstract class Armee {
 		this.pays = pays;
 	}
 	
+	public Armee(Long id, Integer pv, Integer moral, Pays pays, Set<Unite> listeUnites) {
+		this.id = id;
+		this.pv = pv;
+		this.moral = moral;
+		this.pays = pays;
+		this.listeUnites = null;
+	}
+
 	public Long getId() {
 		return id;
 	}

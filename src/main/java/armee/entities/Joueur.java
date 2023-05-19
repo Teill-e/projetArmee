@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class Joueur extends Compte{
 	private String login;
 	@Column(name="joueur_password",nullable=false, length=50)
 	private String password;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "partie_id")
 	private Set<Partie> listeParties;
 	

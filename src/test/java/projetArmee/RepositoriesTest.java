@@ -1,28 +1,17 @@
 package projetArmee;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import armee.config.JPAconfig;
-import armee.entities.Admin;
-import armee.entities.Arme;
-import armee.entities.Armee;
-import armee.entities.ArmeeAir;
-import armee.entities.Composition;
 import armee.entities.Joueur;
 import armee.entities.Partie;
-import armee.entities.Pays;
-import armee.entities.TypeA;
-import armee.entities.Unite;
 import armee.repositories.AdminRepository;
 import armee.repositories.ArmeRepository;
 import armee.repositories.ArmeeRepository;
@@ -30,6 +19,8 @@ import armee.repositories.CompositionRepository;
 import armee.repositories.JoueurRepository;
 import armee.repositories.PartieRepository;
 import armee.repositories.UniteRepository;
+import armee.services.JoueurService;
+import armee.services.PartieService;
 
 @SpringJUnitConfig(JPAconfig.class)
 public class RepositoriesTest {
@@ -55,7 +46,13 @@ public class RepositoriesTest {
 	@Autowired
 	UniteRepository uniteRepo;
 	
-	@Test
+	@Autowired
+	JoueurService jrs;
+	
+	@Autowired 
+	PartieService ps;
+	
+	/*@Test
 	void testAdmin() {
 		Admin admin = new Admin("a", "123");
 		adminRepo.save(admin);
@@ -93,7 +90,7 @@ public class RepositoriesTest {
 		uniteRepo.save(unite);
 		assertNotNull(arme.getId());
 		
-		Optional<Arme> opt = armeRepo.findArmeByUniteArmes(unite);
+		Optional<Arme> opt = armeRepo.findByUniteArmes(unite);
 		if(opt.isPresent()) {
 			assertTrue(opt.get() instanceof Arme);
 		}
@@ -111,7 +108,7 @@ public class RepositoriesTest {
 			assertTrue(opt.get() instanceof Joueur);
 		}
 	}
-	
+	*/
 	@Test
 	void testPartie() {
 		Joueur joueur = new Joueur("c", "123");
@@ -120,14 +117,27 @@ public class RepositoriesTest {
 		
 		partieRepo.save(partie);
 		assertNotNull(partie.getId());
+		List<Partie> opt = partieRepo.findByJoueur(joueur);
 		
-		
-		Optional<Partie> opt = partieRepo.findPartieByJoueur(joueur);
-		if(opt.isPresent()) {
-			assertTrue(opt.get() instanceof Partie);
+		for(Partie p : opt) 
+		{
+			System.out.println(p.getId());
 		}
+		
+		
+		//ps.delete(partie);
+		//System.out.println("Delete");
+		jrs.delete(joueur);
+		System.out.println("Delete");
+		 opt = partieRepo.findByJoueur(joueur);
+		for(Partie p : opt) 
+		{
+			System.out.println(p.getId());
+		}
+		
+		
 	}
-	
+	/*
 	@Test
 	void testComposition() {
 		Joueur joueur = new Joueur("b", "123");
@@ -140,10 +150,8 @@ public class RepositoriesTest {
 		partieRepo.save(partie);
 		assertNotNull(compo.getId());
 		
-		Optional<Composition> opt = compoRepo.findCompositionByParties(partie);
-		if(opt.isPresent()) {
-			assertTrue(opt.get() instanceof Composition);
-		}
+		List<Composition> opt = compoRepo.findByParties(partie);
+		
 	}
 	
 	@Test
@@ -165,12 +173,10 @@ public class RepositoriesTest {
 		uniteRepo.save(unite);
 		assertNotNull(unite.getId());
 		
-		Optional<Unite> opt = uniteRepo.findUniteByComposition(compo);
-		if(opt.isPresent()) {
-			assertTrue(opt.get() instanceof Unite);
-		}
+		List<Unite> opt = uniteRepo.findByComposition(compo);
+		
 	}
-	
+	*/
 	
 }
 

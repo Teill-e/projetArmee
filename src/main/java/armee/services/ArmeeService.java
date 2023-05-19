@@ -23,7 +23,7 @@ public class ArmeeService {
 		if (armee == null) {
 			throw new ArmeeException("armee null");
 		}
-		if (armee.getPv() == null || armee.getMoral() == null || armee.getPays() == null || armee.getListeUnites().isEmpty()) {
+		if (armee.getPv() == null || armee.getMoral() == null || armee.getPays() == null) {
 			throw new ArmeeException("informations manquantes");
 		}
 	}
@@ -66,7 +66,7 @@ public class ArmeeService {
 	
 	public void delete(Long id) {
 		Armee ArmeeEnBase = getById(id);
-		uniteRepo.setArmeeToNull(ArmeeEnBase);
+		uniteRepo.deleteByArmee(ArmeeEnBase);
 		armeeRepo.delete(ArmeeEnBase);
 	}
 }

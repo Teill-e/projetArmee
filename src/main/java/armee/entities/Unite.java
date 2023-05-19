@@ -88,13 +88,6 @@ public class Unite {
 		this.id = id;
 	}
 
-	public Set<Arme> getArme() {
-		return armes;
-	}
-
-	public void setArme(Set<Arme> armes) {
-		this.armes = armes;
-	}
 
 	public int getPrix() {
 		return prix;

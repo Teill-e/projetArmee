@@ -3,26 +3,42 @@ package armee.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import armee.entities.Admin;
 import armee.entities.Compte;
+import armee.entities.Joueur;
 import armee.exceptions.CompteException;
+import armee.repositories.AdminRepository;
 import armee.repositories.CompteRepository;
-import armee.repositories.UniteRepository;
+import armee.repositories.JoueurRepository;
+import armee.repositories.PartieRepository;
 
-
+@Service
 public class CompteService {
 	@Autowired
 	private CompteRepository compteRepo;
 	
+	
+	
 	@Autowired
-	private UniteRepository uniteRepo;
+	private JoueurRepository joueurRepo;
+	
+	@Autowired
+	private AdminRepository adminRepo;
+	
+	@Autowired
+	private PartieRepository partieRepo;
+	
+	
+	
 	
 	
 	private void checkCompte(Compte compte) {
 		if (compte == null) {
 			throw new CompteException("compte null");
 		}
-		if (compte.getUnites() == null || compte.getParties() == null) {
+		if (compte.getLogin() == null || compte.getPassword() == null) {
 			throw new CompteException("informations manquantes");
 		}
 	}
@@ -48,8 +64,8 @@ public class CompteService {
 	public Compte update(Compte compte) {
 		Compte compteEnBase = getById(compte.getId());
 		checkCompte(compte);
-		compteEnBase.setUnites(compte.getUnites());
-		compteEnBase.setParties(compte.getParties());
+		compteEnBase.setLogin(compte.getLogin());
+		compteEnBase.setPassword(compte.getPassword());
 		return compteRepo.save(compteEnBase);
 	}
 	
@@ -63,7 +79,35 @@ public class CompteService {
 	
 	public void delete(Long id) {
 		Compte CompteEnBase = getById(id);
-		uniteRepo.setCompteToNull(CompteEnBase);
-		compteRepo.delete(CompteEnBase);
+		if(CompteEnBase instanceof Admin) { 
+			deleteAdmin(CompteEnBase);
+			}
+		
+		if(CompteEnBase instanceof Joueur) {
+			deleteJoueur(CompteEnBase);
+		}
 	}
+	
+	
+	public void deleteJoueur(Compte joueur) {
+		partieRepo.deleteByJoueur((Joueur) joueur);
+		joueurRepo.delete((Joueur) joueur);
+		
+		
+	}
+	
+	public void deleteAdmin(Compte admin) {
+		
+		adminRepo.delete((Admin) admin);
+		
+	}
+	
+	
 }
+
+
+
+
+
+
+

@@ -3,13 +3,14 @@ package armee.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import armee.entities.Composition;
 import armee.exceptions.CompositionException;
 import armee.repositories.CompositionRepository;
 import armee.repositories.UniteRepository;
 
-
+@Service
 public class CompositionService {
 	@Autowired
 	private CompositionRepository compositionRepo;
@@ -63,7 +64,7 @@ public class CompositionService {
 	
 	public void delete(Long id) {
 		Composition CompositionEnBase = getById(id);
-		uniteRepo.setCompositionToNull(CompositionEnBase);
+		uniteRepo.deleteByComposition(CompositionEnBase);
 		compositionRepo.delete(CompositionEnBase);
 	}
 }

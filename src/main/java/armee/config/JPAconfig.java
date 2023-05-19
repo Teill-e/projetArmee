@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement  //pour la gestion des transactions
+@ComponentScan("armee.services")
 @EnableJpaRepositories("armee.repositories")
 public class JPAconfig {
 
