@@ -6,10 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +28,12 @@ public class Arme {
 	@Column(name="arme_typeA")
 	@Enumerated(EnumType.STRING)
 	private TypeA typeA;
-	@ManyToMany(mappedBy = "armes")
+	@ManyToMany
+	@JoinColumn(name = "armes_unite")
+	@JoinTable(
+			name="unite_arme",
+			joinColumns = @JoinColumn(name="unite_arme_unite_id",foreignKey = @ForeignKey(name = "unite_arme_unite_id_fk")),
+			inverseJoinColumns = @JoinColumn(name = "unite_arme_arme_id", foreignKey = @ForeignKey(name = "unite_arme_arme_id_fk")))
 	private Set<Unite> uniteArmes;
 		
 	public Arme() {

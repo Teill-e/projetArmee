@@ -1,12 +1,15 @@
 package armee.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import armee.entities.Arme;
+import armee.entities.Unite;
 import armee.exceptions.ArmeException;
+import armee.exceptions.CompositionException;
 import armee.repositories.ArmeRepository;
 import armee.repositories.UniteRepository;
 
@@ -56,6 +59,12 @@ public class ArmeService {
 	
 	public List<Arme> getAll(){
 		return armeRepo.findAll();
+	}
+	
+	public Optional<Arme> findByUnite(Unite unite){
+		return Optional.of(armeRepo.findByUniteArmes(unite).orElseThrow(() -> {
+			throw new ArmeException("Pas d'arme pour cette unite");
+		}));
 	}
 	
 	public void delete(Arme arme) {

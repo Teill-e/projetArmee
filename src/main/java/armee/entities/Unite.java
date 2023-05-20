@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +25,7 @@ public class Unite {
 	@Column(name="unite_id")
 	private Long id;
 	@ManyToMany
+	@JoinColumn(name = "unite_arme")
 	@JoinTable(
 			name="unite_arme",
 			joinColumns = @JoinColumn(name="unite_arme_unite_id",foreignKey = @ForeignKey(name = "unite_arme_unite_id_fk")),
@@ -48,6 +50,7 @@ public class Unite {
 		this.armee = armee;
 	}
 
+	
 
 	public Armee getArmee() {
 		return armee;

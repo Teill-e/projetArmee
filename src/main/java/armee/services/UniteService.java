@@ -1,12 +1,16 @@
 package armee.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import armee.entities.Arme;
+import armee.entities.Composition;
 import armee.entities.Compte;
 import armee.entities.Unite;
+import armee.exceptions.CompositionException;
 import armee.exceptions.UniteException;
 import armee.repositories.ArmeRepository;
 import armee.repositories.CompositionRepository;
@@ -65,7 +69,18 @@ public class UniteService {
 	public List<Unite> getAll() {
 		return uniteRepo.findAll();
 	}
-
+	
+	public Unite findByComposition(Composition composition){
+		return uniteRepo.findByComposition(composition).orElseThrow(() -> {
+			throw new UniteException("Pas de composition pour cette unite");
+		});
+	}
+	
+	public Unite findByArme(Arme arme){
+		return uniteRepo.findByArmes(arme).orElseThrow(() -> {
+			throw new UniteException("Pas d'arme pour cette unite");
+		});
+	}
 
 	public void delete(Unite unite) {
 		delete(unite.getId());

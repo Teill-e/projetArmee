@@ -16,9 +16,9 @@ import armee.entities.Composition;
 import armee.entities.Unite;
 
 public interface UniteRepository extends JpaRepository<Unite, Long> {
-	List<Unite> findByComposition (Composition composition);
+	Optional<Unite> findByComposition (Composition composition);
 	
-	List<Unite> findByArmes (Arme armes);
+	Optional<Unite> findByArmes (Arme armes);
 
 	@Query("update Unite u set u.armee=null where u.armee=:armee")
 	@Transactional
@@ -37,4 +37,8 @@ public interface UniteRepository extends JpaRepository<Unite, Long> {
 	@Transactional
 	@Modifying
 	void deleteByArmee(Armee armeeEnBase);
+	
+	@Transactional
+	@Modifying
+	void deleteByArmes(Arme armesEnBase);
 }

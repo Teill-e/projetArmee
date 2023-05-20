@@ -99,14 +99,36 @@ public class ServicesTest {
 		
 		Composition compo = new Composition(unites, parties, 50);
 		compoSrv.create(compo);
+//		Composition compo2 = compo;
+//		
+//		p1.setCompoIA(compo);
+//		p1.setCompoJoueur(compo2);
+//		//partieSrv.update(p1);
 		
 		//compoSrv.delete(compo);
 		
-		armeeSrv.delete(army);
+		//armeeSrv.delete(army);
+		
+		//uniteSrv.delete(u1);
+		
+		//armeSrv.delete(a1);
+		
+		//partieSrv.delete(p1);
+		
+		//joueurSrv.delete(joueur);
+		
+		//System.out.println(compoSrv.findByParties(p1));
+		
+		//partieSrv.findByDate(LocalDate.now());
+		
+		//partieSrv.findByJoueur(joueur);
+		
+		//uniteSrv.findByArme(a1);
 		
 		
-		
-		
+//		u1.setComposition(compo);
+//		uniteSrv.update(u1);
+//		uniteSrv.findByComposition(compo);
 	}
 	
 }

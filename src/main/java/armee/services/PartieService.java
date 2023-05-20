@@ -1,12 +1,16 @@
 package armee.services;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import armee.entities.Compte;
+import armee.entities.Joueur;
 import armee.entities.Partie;
+import armee.exceptions.CompositionException;
 import armee.exceptions.PartieException;
 import armee.repositories.CompositionRepository;
 import armee.repositories.PartieRepository;
@@ -64,6 +68,18 @@ public class PartieService {
 }
 	public List<Partie> getAll() {
 		return partieRepo.findAll();
+	}
+	
+	public Optional<Partie> findByDate(LocalDate date){
+		return Optional.of(partieRepo.findByDate(date).orElseThrow(() -> {
+			throw new PartieException("Pas de partie pour cette date");
+		}));
+	}
+	
+	public Optional<Partie> findByJoueur(Joueur joueur){
+		return Optional.of(partieRepo.findByJoueur(joueur).orElseThrow(() -> {
+			throw new PartieException("Pas de partie pour ce joueur");
+		}));
 	}
 
 

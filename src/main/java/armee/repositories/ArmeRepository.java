@@ -17,5 +17,5 @@ public interface ArmeRepository extends JpaRepository<Arme, Long> {
 	
 	@Transactional
 	@Modifying
-	void deleteByUniteArmes(Unite unite);
+	void deleteByUniteArmes(Unite uniteArmes);
 }

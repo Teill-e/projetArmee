@@ -1,11 +1,13 @@
 package armee.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import armee.entities.Composition;
+import armee.entities.Partie;
 import armee.exceptions.CompositionException;
 import armee.repositories.CompositionRepository;
 import armee.repositories.UniteRepository;
@@ -56,6 +58,12 @@ public class CompositionService {
 	
 	public List<Composition> getAll(){
 		return compositionRepo.findAll();
+	}
+	
+	public Composition findByParties(Partie parties){
+		return compositionRepo.findByParties(parties).orElseThrow(() -> {
+			throw new CompositionException("Pas de composition pour ces parties");
+		});
 	}
 	
 	public void delete(Composition composition) {

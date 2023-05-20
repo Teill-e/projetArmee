@@ -2,6 +2,7 @@ package armee.repositories;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -13,9 +14,9 @@ import armee.entities.Joueur;
 import armee.entities.Partie;
 
 public interface PartieRepository extends JpaRepository<Partie, Long> {
-	List<Partie> findByDate(LocalDate date);
+	Optional<Partie> findByDate(LocalDate date);
 	
-	List<Partie> findByJoueur(Joueur joueur);
+	Optional<Partie> findByJoueur(Joueur joueur);
 	
 	
 	@Transactional

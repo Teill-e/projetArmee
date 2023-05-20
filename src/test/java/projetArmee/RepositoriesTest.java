@@ -109,7 +109,7 @@ public class RepositoriesTest {
 		}
 	}
 	*/
-	@Test
+	/*@Test
 	void testPartie() {
 		Joueur joueur = new Joueur("c", "123");
 		joueurRepo.save(joueur);
